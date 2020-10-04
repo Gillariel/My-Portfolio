@@ -1,0 +1,40 @@
+[
+  {
+    "to": "/",
+    "title": "Home"
+  },
+  {
+    "to": "/cv",
+    "title": "Curriculum Vitae"
+  },
+  {
+    "to": "/blog",
+    "title": "My blog",
+    "sub": [
+      {
+        "to": "/blog/js",
+        "title": "JS"
+      },
+      {
+        "to": "/csharp",
+        "title": "C#"
+      },
+      {
+        "to": "/ue4",
+        "title": "Unreal engine 4"
+      },
+      {
+        "to": "/music",
+        "title": "Music"
+      },
+      {
+        "to": "/non-it",
+        "title": "Not IT"
+      }
+    ]
+  },
+  {
+    "to": "/about",
+    "title": "About me"
+  }
+]
