@@ -1,0 +1,63 @@
+.scale-hover {
+  transform: scale(1);
+  transition: all 150ms ease-in-out;
+}
+
+.scale-hover:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.no-link {
+  color: rgb(99, 104, 109);
+  text-decoration: none;
+}
+
+.no-link:hover * {
+  color: purple;
+}
+
+.color-hover {
+  cursor: pointer;
+  color: rgb(99, 104, 109);
+}
+
+.color-hover:hover * {
+  color: purple;
+}
+
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+@media (min-width: 0px) and (max-width: 600px) {
+  .img-responsive {
+    max-width: 200px;
+    max-height: 150px;
+  }
+}
+@media (min-width: 600.1px) and (max-width: 960px) {
+  .img-responsive {
+    max-width: 300px;
+    max-height: 200px;
+  }
+}
+@media (min-width: 960.1px) and (max-width: 1280px) {
+  .img-responsive {
+    max-width: 400px;
+    max-height: 300px;
+  }
+}
+@media (min-width: 1280.1px) and (max-width: 1920px) {
+  .img-responsive {
+    max-width: 400px;
+    max-height: 300px;
+  }
+}
+@media (min-width: 1920.1px)  {
+  .img-responsive {
+    max-width: 400px;
+    max-height: 300px;
+  }
+}

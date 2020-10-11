@@ -1,0 +1,11 @@
+[
+  { "id": "java", "name": "Java" },
+  { "id": "csharp", "name": "C#/.Net (Framework & Core)"},
+  { "id": "react", "name": "React"},
+  { "id": "js", "name": "Javascript vanilla"},
+  { "id": "ts", "name": "Typescript"},
+  { "id": "ue4", "name": "Unreal engine 4"},
+  { "id": "node", "name": "Node JS"},
+  { "id": "css", "name": "CSS"},
+  { "id": "html", "name": "HTML"}
+]

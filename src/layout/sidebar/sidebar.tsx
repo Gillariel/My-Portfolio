@@ -58,17 +58,16 @@ scheme.configureEdgeSidebar((builder) => {
       collapsedWidth: 64,
     });
 });
-scheme.configureInsetSidebar(builder => {
-  builder
-    .create("secondarySidebar", { anchor: 'right' })
-    .registerFixedConfig('md', { width: 256 })
-})
+// scheme.configureInsetSidebar(builder => {
+//   builder
+//     .create("secondarySidebar", { anchor: 'right' })
+//     .registerFixedConfig('md', { width: 256 })
+// })
 
 interface ISidebar { children: any }
 
 const Sidebar = ({ children }: ISidebar) => {
   const { content, isLoading, isError } = useNavbarContent();
-  console.log(content)
   return (
     <Root scheme={scheme}>
       <CssBaseline />
@@ -83,15 +82,15 @@ const Sidebar = ({ children }: ISidebar) => {
           <List>
             {!isLoading
               ? !isError && content
-                  ? content.map(c =>  <>
+                  ? content.map(c =>  <div key={c.title}>
                                         <ListItem {...c} icon={<Icon />} nested={c.sub !== undefined} />
                                         {c.sub && <Collapse in={true} timeout="auto" unmountOnExit>
                                             <List component="div" disablePadding>
-                                              {c.sub.map(s => <ListItem {...s} icon={<Icon />} />)}
+                                              {c.sub.map(s => <ListItem key={s.title} {...s} icon={<Icon />} />)}
                                             </List>
                                           </Collapse>
                                         }
-                                      </>)
+                                      </div>)
                   : <Typography>Fail to load menu content.</Typography>
               : <div style={{ backgroundColor: "lightgrey", height: "100%", width: "100%" }}>
                   <CircularProgress />
@@ -102,13 +101,15 @@ const Sidebar = ({ children }: ISidebar) => {
         <CollapseBtn />
       </DrawerSidebar>
       <Content>
-        <InsetContainer
+        {/*<InsetContainer
           rightSidebar={
             <InsetSidebar sidebarId="secondarySidebar">
               <Header />
             </InsetSidebar>
           }
-        >{children}</InsetContainer>
+        >*/}
+        {children}
+        {/*</InsetContainer>*/}
       </Content>
       <MuiFooter>
         <Container>

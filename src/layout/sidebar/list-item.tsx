@@ -14,9 +14,9 @@ interface IProps {
 
 export default ({ title, icon, to, nested }: IProps) => {
   return (
-    <ListItem>
+    <ListItem className="color-hover">
       <ListItemIcon>{icon}</ListItemIcon>
-      <Link to={to}>
+      <Link className="no-link" to={to}>
         <ListItemText primary={title} />
       </Link>
       {nested !== undefined 
