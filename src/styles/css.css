@@ -1,3 +1,36 @@
+/*
+  maincolor should be #38a7bb
+*/
+
+.greyscale-image {
+  filter: gray; /* IE5+ */
+  opacity: 0.9;
+  -webkit-filter: grayscale(1);
+  transition: all .25s linear; 
+  -webkit-transition: all .25s linear;  
+}
+
+.greyscale-image:hover {
+  opacity: 1;
+  filter: none;
+  -webkit-filter: grayscale(0);
+}
+
+.centered-underline b {
+  display: inline-block;
+  position: relative;
+}
+.centered-underline b:after {
+  content: "";
+  height: 3px;
+  width: 50%;
+  background-color: #2196f3;
+  position: absolute;
+  bottom: -.1em;
+  left: 50%;
+  transform: translate(-50%);
+}
+
 .scale-hover {
   transform: scale(1);
   transition: all 150ms ease-in-out;

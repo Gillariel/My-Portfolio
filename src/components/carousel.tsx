@@ -3,24 +3,30 @@ import Carousel, { autoplayPlugin, Dots, slidesToShowPlugin } from '@brainhubeu/
 import Typography from '@material-ui/core/Typography/Typography';
 import Grid from '@material-ui/core/Grid/Grid';
 
-interface IItemProps {
+interface Item {
   text?: any;
   image: string;
-  imagePosition?: "left" | "right",
-  backgroundColor?: string
+  imagePosition?: "left" | "right";
+  backgroundColor?: string;
 }
+interface IItemProps extends Item { imgMaxSize?: string, useGreyEffect?: boolean }
 
 const Item = ({
   text,
   image,
   imagePosition,
   backgroundColor,
+  imgMaxSize,
+  useGreyEffect
 }: IItemProps) => {
   const items = [];
   if(!text){
     return (
       <Grid item xs={4} style={{ textAlign: "center", alignSelf: "center", marginTop: "20px", paddingLeft: "10px", paddingRight: "10px" }}>
-        <img className="img-responsive" src={image} />
+        <img className={`img-responsive ${useGreyEffect !== undefined && useGreyEffect !== false ? 'greyscale-image' : ''}`} 
+          src={image} 
+          width={imgMaxSize ?? ""} 
+        />
       </Grid>
     )
   }
@@ -31,7 +37,7 @@ const Item = ({
     </Typography>
   </Grid>
   const imageComp = <Grid item xs={6} style={{ textAlign: imagePosition === "left" ? "right" : "left", marginTop: "20px", paddingLeft: "10px", paddingRight: "10px" }}>
-    <img className="img-responsive" src={image} />
+    <img className={`img-responsive ${useGreyEffect !== undefined && useGreyEffect !== false ? 'greyscale-image' : ''}`} src={image} />
   </Grid>
   
   if(imagePosition === 'left') items.push(imageComp, textComp)
@@ -45,35 +51,40 @@ const Item = ({
 }
 
 interface IMyCarourelProps {
+  title?: string;
   backgroundImage?: string;
   backgroundColor?: string;
-  items: IItemProps[];
+  imgMaxSize?: string;
+  useGreyEffect?: boolean;
+  items: Item[];
   itemsPerSlide: number
 }
 
-const buildGrouped = (items: IItemProps[], nbItemPerGroup: number) => {
+const buildGrouped = (items: Item[], nbItemPerGroup: number, imgMaxSize?: string, useGreyEffect?: boolean) => {
   const result: any[] = [];
   let temp: any[] = []
   const ratio = nbItemPerGroup;
   items.forEach((item, i) => {
     console.log(i % ratio)
     if((i + 1) % ratio > 0 && i < items.length - 1)
-      temp.push(<Item key={i} {...item} />)
+      temp.push(<Item key={i} {...item} imgMaxSize={imgMaxSize} useGreyEffect={useGreyEffect} />)
     else {
       result.push(<Grid container>
         {temp}
-        <Item key={i} {...item} />
+        <Item key={i} {...item} imgMaxSize={imgMaxSize} useGreyEffect={useGreyEffect} />
       </Grid>);
       temp = [];
     }
   })
-  console.log(result);
   return result
 }
 
 const MyCarousel = ({
+  title,
   backgroundImage,
   backgroundColor,
+  imgMaxSize,
+  useGreyEffect,
   items,
   itemsPerSlide
 }: IMyCarourelProps) => {
@@ -82,6 +93,7 @@ const MyCarousel = ({
 
   return (
     <div style={{ backgroundImage: `url(${backgroundImage})`, backgroundColor }}>
+      {title && <Typography variant="h4" style={{ paddingTop: "20px", textAlign: "center" }}><b>{title}</b></Typography>}
       <Carousel
         value={value}
         onChange={onChange}
@@ -101,9 +113,9 @@ const MyCarousel = ({
           },
        ]}   
        animationSpeed={1000}
-      >
+      > 
         {items && (items.findIndex(i => !!i.text)
-          ? buildGrouped(items, itemsPerSlide)
+          ? buildGrouped(items, itemsPerSlide, imgMaxSize, useGreyEffect)
           : items.map((item, i) => <Item key={i} {...item} />)
         )}
       </Carousel>
