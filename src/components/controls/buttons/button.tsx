@@ -19,6 +19,20 @@ const ColorButton = withStyles((theme: Theme) => ({
     transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out"
   },
 }))(MuiButton);
+//TODO sould pass a param to invert the color in the ColorButton, dont have time to check how to do it correctly right now
+const InvertedColorButton = withStyles((theme: Theme) => ({
+  root: {
+    color: "white",
+    backgroundColor: blue[500],
+    '&:hover': {
+      color: blue[500],
+      backgroundColor: "white",
+    },
+    borderRadius: "0px",
+    webkitTransition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out",
+    transition: "color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out"
+  },
+}))(MuiButton);
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,23 +50,37 @@ interface IButtonProps {
   }
   link?: string
   onClick?: () => void;
+  invertColor?: boolean
 }
 
 const Button = ({
   text,
   iconSettings,
   link,
-  onClick
+  onClick,
+  invertColor = false
 }: IButtonProps) => {
   const classes = useStyles()
   return (
-      <ColorButton 
+    invertColor !== undefined && invertColor
+      ? <InvertedColorButton 
+          variant="outlined" 
+          color="primary" 
+          startIcon={iconSettings && iconSettings.position === "start" ? iconSettings.icon : null}
+          endIcon={iconSettings && iconSettings.position === "end" ? iconSettings.icon : null}
+          className={classes.margin} 
+          href={link ? link : "#"}
+          onClick={onClick}
+        >
+          {text}
+        </InvertedColorButton>
+      : <ColorButton 
         variant="outlined" 
         color="primary" 
         startIcon={iconSettings && iconSettings.position === "start" ? iconSettings.icon : null}
         endIcon={iconSettings && iconSettings.position === "end" ? iconSettings.icon : null}
         className={classes.margin} 
-        href="#outlined-buttons"
+        href={link ? link : "#"}
         onClick={onClick}
       >
         {text}

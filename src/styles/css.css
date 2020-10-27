@@ -41,11 +41,15 @@
   cursor: pointer;
 }
 
+.no-link--clean-blue,
 .no-link {
   color: rgb(99, 104, 109);
   text-decoration: none;
 }
 
+.no-link--clean-blue:hover * {
+  color: #38a7bb;
+}
 .no-link:hover * {
   color: purple;
 }

@@ -65,7 +65,6 @@ const buildGrouped = (items: Item[], nbItemPerGroup: number, imgMaxSize?: string
   let temp: any[] = []
   const ratio = nbItemPerGroup;
   items.forEach((item, i) => {
-    console.log(i % ratio)
     if((i + 1) % ratio > 0 && i < items.length - 1)
       temp.push(<Item key={i} {...item} imgMaxSize={imgMaxSize} useGreyEffect={useGreyEffect} />)
     else {

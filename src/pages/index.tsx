@@ -7,8 +7,27 @@ import Button from '../components/controls/buttons/button'
 import Typography from '@material-ui/core/Typography/Typography'
 import Colored from '../components/text/colored'
 import ImageWithParagraph from '../components/layout/image-with-paragraph'
+import { getListOfAllFile, FileIndex } from '../utils/public-files' 
+import BlogPreview from '../components/layout/blog-preview';
+
+const NUMBER_OF_LATEST_BLOGS_PREVIEW = 4;
 
 export default function Home() {
+
+  const [latestBlogs, setLatestBlogs] = React.useState<FileIndex[] | null>(null);
+
+  React.useEffect(() => {
+    (async () => {
+      const blogsMetadata = await getListOfAllFile("/blog");
+      console.log(blogsMetadata)
+      if(!blogsMetadata) setLatestBlogs([]);
+      else 
+        setLatestBlogs(blogsMetadata.sort((a, b) => a.date.getTime() - b.date.getTime()).slice(0, NUMBER_OF_LATEST_BLOGS_PREVIEW));
+    })()
+  }, []);
+
+  console.log(latestBlogs)
+
   return (
     <Layout>
       <Grid container>
@@ -125,6 +144,16 @@ export default function Home() {
             When I learn something useful, I like to synthetize it into a document that can help other people to learn it faster. 
             Here is my last articles but feel free to check <Colored>my blog</Colored> for other one !
           </Typography>
+          {latestBlogs && (
+            latestBlogs.length === 0 
+              ? <Typography style={{ textAlign: "center" }}>It seems loading of blogs failed or that I do not have any blogs yet :/</Typography>
+              : <Grid container>
+                {latestBlogs.map(blog => <Grid item md={3}>
+                  <BlogPreview key={Math.random() * 25000} { ...blog } />
+                </Grid>)
+                }
+              </Grid>
+          )}
           {/* 
             TODO Add blog last X blog items here
               Should fetch them from static json file (loaded in useEffect)

@@ -1,0 +1,24 @@
+{
+  "sample": {
+    "name": "Name of the blog post",
+    "image": "relative link from 'static/'",
+    "title": "Well, a title..",
+    "description": "Well, a description",
+    "category": "java | csharp | react | js | ts | ue4 | node | css | html",
+    "link": "relative link to the blog post",
+    "type": "'md' | 'svg' | 'png' | 'jpg' | 'jpeg'",
+    "date": "any date like 01/01/1970"
+  },
+  "data": [
+    {
+      "name": "UNREAL ENGINE 4 - LOADING SCREEN",
+      "image": "/blog/ue4/loading-screen/cover.png",
+      "title": "UNREAL ENGINE 4 - LOADING SCREEN",
+      "description": "Manage a loading screen without streaming levels for the Unreal Engine.",
+      "category": "ue4",
+      "link": "/blog?language=ue4&name=loading-screen",
+      "type": "md",
+      "date": "01/01/1970"
+    }
+  ]
+}
